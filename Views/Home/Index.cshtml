@@ -1,0 +1,27 @@
+﻿@using aspnetcoreapp_efcore_inherited_entity_id_problem.Data;
+
+@model IEnumerable<AnimalBase>;
+
+<p>
+    @Model.Count()
+</p>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var obj in Model)
+    {
+        <tr>
+            <td>@obj.Id</td>
+            <td>@obj.Name</td>
+            <td>@obj.GetType()</td>
+        </tr>
+    }
+    </tbody>
+</table>
