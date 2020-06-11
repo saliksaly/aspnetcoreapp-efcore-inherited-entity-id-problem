@@ -24,7 +24,7 @@ namespace aspnetcoreapp_efcore_inherited_entity_id_problem.Controllers
 
         public IActionResult Index()
         {
-            // Fix for EF Core 3 derived entity types
+            // Workaround according to https://github.com/dotnet/efcore/issues/19854#issuecomment-596011059
             int maxId = _dbContext.Animal.Max(x => x.Id);
             if (maxId == 2)
             {
@@ -34,7 +34,7 @@ namespace aspnetcoreapp_efcore_inherited_entity_id_problem.Controllers
             // Uncomment the case you would like to test...
 
             // 1st problem:
-            // This causes error "ArgumentException: An item with the same key has already been added. Key: 1".
+            // NOT A PROBLEM ANYMORE THANKS TO THE WORKAROUND This causes error "ArgumentException: An item with the same key has already been added. Key: 1".
             _dbContext.Cat.Add(
                    new Cat
                    {
@@ -43,7 +43,7 @@ namespace aspnetcoreapp_efcore_inherited_entity_id_problem.Controllers
             _dbContext.SaveChanges();
 
             // 2nd problem:
-            // This inserts new Dog with id 1 and replaces Cat with id 1.
+            // NOT A PROBLEM ANYMORE THANKS TO THE WORKAROUND This inserts new Dog with id 1 and replaces Cat with id 1.
             _dbContext.Dog.Add(
                 new Dog
                 {
